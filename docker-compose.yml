@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  api-scrapping:
+    image: tiangolo/uvicorn-gunicorn-fastapi:python3.9
+    container_name: api-scrapping
+    restart: always
+    ports:
+      - "8200:80"
+    volumes:
+      - .:/app  # Mount the current directory
+      - ./.env:/app/.env  # Mount the .env file for environment variables
+    env_file:
+      - ./.env  # Optionally specify the environment file here too
+    command: uvicorn main:app --host 0.0.0.0 --port 80
